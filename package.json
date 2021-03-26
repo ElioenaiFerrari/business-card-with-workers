@@ -1,0 +1,16 @@
+{
+  "name": "workers",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "author": "Elioenai Ferrari <elioenaiferrari@gmail.com>",
+  "scripts": {
+    "start:dev": "nodemon src",
+    "start:prod": "rm -rf output && mkdir -p output && node src"
+  },
+  "dependencies": {
+    "nodemon": "^2.0.7",
+    "puppeteer": "^8.0.0",
+    "uuid": "^8.3.2"
+  }
+}
