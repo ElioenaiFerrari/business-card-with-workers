@@ -6,11 +6,13 @@
   "author": "Elioenai Ferrari <elioenaiferrari@gmail.com>",
   "scripts": {
     "start:dev": "nodemon src",
-    "start:prod": "rm -rf output && mkdir -p output && node src"
+    "start:worker": "rm -rf output && mkdir -p output && node src",
+    "start:cluster": "rm -rf output && mkdir -p output && node src/puppeteer-cluster.js"
   },
   "dependencies": {
     "nodemon": "^2.0.7",
     "puppeteer": "^8.0.0",
+    "puppeteer-cluster": "^0.22.0",
     "uuid": "^8.3.2"
   }
 }
