@@ -10,6 +10,7 @@
     "start:cluster": "rm -rf output && mkdir -p output && node src/puppeteer-cluster.js"
   },
   "dependencies": {
+    "locate-chrome": "^0.1.1",
     "nodemon": "^2.0.7",
     "puppeteer": "^8.0.0",
     "puppeteer-cluster": "^0.22.0",

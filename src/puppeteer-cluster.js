@@ -18,7 +18,7 @@ function createQueryStringFromObject(data) {
 }
 
 async function render({ page, data: { finalURI, name } }) {
-  const output = join(__dirname, `./../output/${name}-${v1()}.pdf`);
+  const output = join(process.cwd(), 'output', `/${name}-${v1()}.pdf`);
   await page.goto(finalURI, { waitUntil: 'networkidle2' });
   await page.pdf({
     path: output,
@@ -31,13 +31,12 @@ async function render({ page, data: { finalURI, name } }) {
 }
 
 async function main() {
+  const pid = process.pid;
   try {
     const cluster = await Cluster.launch({
       concurrency: Cluster.CONCURRENCY_CONTEXT,
       maxConcurrency: 10,
     });
-
-    const pid = process.pid;
 
     await cluster.task(render);
 

@@ -2,6 +2,7 @@ const { v1 } = require('uuid');
 const puppeteer = require('puppeteer');
 const querystring = require('querystring');
 const { join } = require('path');
+const locateChrome = require('locate-chrome');
 
 const BASE_URL =
   'https://erickwendel.github.io/business-card-template/index.html';
@@ -16,8 +17,12 @@ function createQueryStringFromObject(data) {
 }
 
 async function render({ finalURI, name }) {
+  const executablePath = await locateChrome();
+
   const output = join(__dirname, `./../output/${name}-${v1()}.pdf`);
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    executablePath,
+  });
   const page = await browser.newPage();
   await page.goto(finalURI, { waitUntil: 'networkidle2' });
   await page.pdf({
@@ -31,8 +36,9 @@ async function render({ finalURI, name }) {
 }
 
 async function main(message) {
+  const pid = process.pid;
+
   try {
-    const pid = process.pid;
     const qs = createQueryStringFromObject(message);
     const finalURI = `${BASE_URL}?${qs}`;
 
